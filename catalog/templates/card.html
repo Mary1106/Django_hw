@@ -1,8 +1,4 @@
 {% extends 'base.html' %}
-
-
-{% block title %} Все товары {% endblock %}
-
 {% block content %}
     <div class="container">
 
@@ -10,13 +6,13 @@
         {% for product in products %}
         <div class="col">
           <div class="card shadow-sm">
-            <img src="{{product.image.url}}" width="100%" height="100%" alt="{{product.product_name}}">
+            <img src="{{product.image.url}}" alt="{{product.product_name}}">
             <div class="card-body">
               <p class="card-text"> {{product.product_name}} </p>
               <p class="card-text"> {{product.description|truncatechars:100}} </p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a class="btn btn-primary" href="{% url 'catalog:product_detailed' product.pk %}" role="button">Подробнее</a>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                 </div>
               </div>
             </div>
@@ -25,4 +21,16 @@
         {% endfor %}
       </div>
     </div>
+{% endblock %}
+
+    {% extends 'base.html' %}
+
+{% block content %}
+<ul>
+    {% for product in products %}
+        <li> {{product.product_name}} </li>
+        <li> <img src="{{product.image.url}}" alt="{{product.product_name}}"> </li>
+        <li> {{product.description|truncatechars:100}} </li>
+    {% endfor %}
+</ul>>
 {% endblock %}
