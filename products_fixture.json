@@ -1,0 +1,67 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "product_name": "Велосипед",
+        "description": "Руль, два колеса",
+        "image": "",
+        "category": 2,
+        "price": "25000.00",
+        "created_at": "2024-10-10T05:06:07Z",
+        "updated_at": "2024-10-10T05:06:07Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "product_name": "Палатка",
+        "description": "Одноместная",
+        "image": "",
+        "category": 2,
+        "price": "5000.00",
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "product_name": "Кисти",
+        "description": "5 штук",
+        "image": "",
+        "category": 1,
+        "price": "500.00",
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "product_name": "Краски",
+        "description": "Акварель, 20 цветов",
+        "image": "",
+        "category": 1,
+        "price": "1000.00",
+        "created_at": null,
+        "updated_at": null
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "product_name": "Альбом",
+        "description": "24 листа",
+        "image": "",
+        "category": 1,
+        "price": "250.00",
+        "created_at": null,
+        "updated_at": null
+    }
+}
+]
