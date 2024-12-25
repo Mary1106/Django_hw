@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load my_tags %}
 
 
 {% block title %} Все товары {% endblock %}
@@ -10,7 +11,7 @@
         {% for product in products %}
         <div class="col">
           <div class="card shadow-sm">
-            <img src="{{product.image.url}}" width="100%" height="100%" alt="{{product.product_name}}">
+            <img src="{{product.image | media_filter}}" width="100%" height="100%" alt="{{product.product_name}}">
             <div class="card-body">
               <p class="card-text"> {{product.product_name}} </p>
               <p class="card-text"> {{product.description|truncatechars:100}} </p>
