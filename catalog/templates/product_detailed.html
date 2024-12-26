@@ -1,0 +1,32 @@
+
+{% extends 'base.html'%}
+{% load my_tags %}
+
+{% block title %}<h1> Описание товара </h1>{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+            <div class="card shadow-sm">
+                <img src="{{product.image | media_filter}}" alt="{{product.product_name}}">
+                <div class="card-body"><p class="card-text"> {{product.price}} руб. </p>
+                    <p class="card-text"> {{product.product_name}} </p>
+                    <p class="card-text"> Описание: {{product.description}} </p>
+                    <p class="card-text"> Размещен: {{product.created_at|date:"d M Y"}} </p>
+                    <p class="card-text"> Обновлен: {{product.updated_at|date:"d M Y"}} </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="{% url 'catalog:home' %}" role="button">На главную</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
