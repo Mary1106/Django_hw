@@ -1,0 +1,23 @@
+
+{% extends 'catalog/base.html'%}
+{% load my_tags %}
+
+{% block title %}<h1> Добавить товар </h1>{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+            <div class="card shadow-sm">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class = "btn btn-primary"> Удалить </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,13 +1,32 @@
 from django.shortcuts import render
 from .models import Product
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-def home(request):
-    """Функция-контроллер, рендерит шаблон страницы home со списком всех продуктов БД"""
+class ProductListView(ListView):
+    model = Product
 
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'home.html', context)
+
+class ProductDetailView(DetailView):
+    model = Product
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ('product_name', 'description', 'image', 'category', 'price')
+    success_url = reverse_lazy('catalog:product_list')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ('product_name', 'description', 'image', 'category', 'price')
+    success_url = reverse_lazy('catalog:product_list')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:product_list')
 
 
 def contacts(request):
@@ -16,9 +35,4 @@ def contacts(request):
     return render(request, 'contacts.html')
 
 
-def product_detailed(request, pk):
-    """Функция-контроллер, рендерит шаблон страницы product"""
 
-    product = Product.objects.get(pk=pk)
-    context = {'product': product}
-    return render(request, 'product_detailed.html', context)
