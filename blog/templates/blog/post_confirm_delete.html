@@ -1,0 +1,27 @@
+
+{% extends 'blog/base.html'%}
+{% load my_tags %}
+
+{% block title %}<h1> Удалить пост </h1>{% endblock %}
+
+{% block content %}
+<form method="POST">
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+            <p>Вы действительно хотите удалить этот пост?</p>
+            <div class="card shadow-sm">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class = "btn btn-primary"> Удалить </button>
+            <a class="btn btn-primary" href="{% url 'blog:post_list' %}" role="button">Отмена</a>
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+{% endblock %}
+

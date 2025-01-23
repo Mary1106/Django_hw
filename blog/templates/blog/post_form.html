@@ -1,0 +1,35 @@
+
+{% extends 'blog/base.html'%}
+{% load my_tags %}
+
+{% block title %}<h1> Добавить пост </h1>{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <div class="col">
+
+            <div class="card shadow-sm">
+                <h3> {% if object %} Изменить {% else %} Опубликовать новый {% endif %}пост </h3>
+                {% csrf_token %}
+                {{ form.as_p }}
+
+            <button type="submit" class = "btn btn-primary">
+                {% if object %}
+                Изменить
+                {% else %}
+                Опубликовать
+                {% endif %}
+            </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
+
+
