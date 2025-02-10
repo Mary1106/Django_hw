@@ -20,8 +20,9 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product/image', verbose_name='Изображение', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name='Категория')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
-    created_at = models.DateTimeField(verbose_name='Дата создания', blank=True, null=True)
-    updated_at = models.DateTimeField(verbose_name='Дата последнего изменения', blank=True, null=True)
+    created_at = models.DateTimeField(verbose_name='Дата создания', blank=True, null=True, auto_now_add=True)
+    updated_at = models.DateTimeField(verbose_name='Дата последнего изменения', blank=True, null=True, auto_now_add=True)
+    check_box = models.BooleanField(verbose_name='Чекбокс', default=False)
 
     def __str__(self):
         return f'{self.category}: {self.product_name} - {self.price}'
