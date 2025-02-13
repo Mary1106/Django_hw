@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+
+
+{% block title %} Пост {% endblock %}
+
+{% block content %}
+
+
+<article class="blog-post">
+    <h2 class="display-5 link-body-emphasis mb-1">{{post.post_title}}</h2>
+    <p class="blog-post-meta"> {{post.created_at}} </p>
+    <p> {{post.content}} </p>
+    <img src="{{object.preview | media_filter}}" alt="{{object.post_title}}">
+    <hr>
+    <p>Просмотров: {{object.views_count}}</p>
+        <div class="btn-group">
+            <a class="btn btn-primary" href="{% url 'blog:post_list' %}" role="button">На главную</a>
+            <a class="btn btn-primary" href="{% url 'blog:post_update' object.pk %}" role="button">Редактировать</a>
+            <a class="btn btn-primary" href="{% url 'blog:post_delete' object.pk %}" role="button">Удалить</a>
+        </div>
+
+</article>
+
+{% endblock %}
+
