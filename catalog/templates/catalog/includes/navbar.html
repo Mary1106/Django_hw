@@ -19,9 +19,20 @@
   </div>
   <div class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-      <a href="#" class="navbar-brand d-flex align-items-center">
-        <strong>Меню</strong>
-      </a>
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'users:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-secondary">Выйти</button>
+            </form>
+
+          <p> {{user.username}}, добро пожаловать! </p>
+          {% else %}
+          <div class="btn-group me-2" role="group">
+          <a href="{% url 'users:login' %}" class="btn btn-outline-secondary">Вход</a>
+          <a href="{% url 'users:register' %}" class="btn btn-outline-secondary">Регистрация</a>
+          </div>
+          <p> Вы вошли как Гость </p>
+          {% endif %}
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
