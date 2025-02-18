@@ -24,7 +24,7 @@ class ProductForm(StyleFormMixin, ModelForm):
 
     class Meta:
         model = Product
-        exclude = ('created_at', 'updated_at',)
+        exclude = ('created_at', 'updated_at', 'is_published')
 
     def clean_product_name(self):
         product_name = self.cleaned_data['product_name']
@@ -61,3 +61,9 @@ class ProductForm(StyleFormMixin, ModelForm):
             'class': 'form-control',
             'placeholder': 'Введите цену продукта'
         })
+
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('is_published',)
