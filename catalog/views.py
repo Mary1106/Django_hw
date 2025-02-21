@@ -1,5 +1,5 @@
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from .forms import ProductForm, ProductModeratorForm
 from .models import Product
 from django.urls import reverse_lazy
@@ -44,7 +44,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         user = self.request.user
         if user == self.object.owner:
             return ProductForm
-        if user.has_perm('catalog.can_delete_product'):
+        elif user.has_perm('catalog.can_delete_product'):
             return ProductModeratorForm
         raise PermissionDenied
 
@@ -52,6 +52,13 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:product_list')
+
+    def get_object(self, queryset=None):
+        user = self.request.user
+        product = super().get_object(queryset)
+        if user == product.owner or user.has_perm('catalog.can_delete_product'):
+            return product
+        raise PermissionDenied
 
 
 def contacts(request):
