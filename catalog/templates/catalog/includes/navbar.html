@@ -1,0 +1,41 @@
+
+  <div class="collapse text-bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4>Интернет-магазин</h4>
+          <p class="text-body-secondary">найдется всякое</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4>Навигация: </h4>
+          <ul class="list-unstyled">
+            <li><a href="{% url 'catalog:product_list' %}" class="text-white">Главная</a></li>
+            <li><a href="{% url 'catalog:product_create' %}" class="text-white">Добавить продукт</a></li>
+            <li><a href="{% url 'catalog:contacts' %}" class="text-white">Контакты</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+          {% if user.is_authenticated %}
+            <form method="post" action="{% url 'users:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-secondary">Выйти</button>
+            </form>
+
+          <p> {{user.username}}, добро пожаловать! </p>
+          {% else %}
+          <div class="btn-group me-2" role="group">
+          <a href="{% url 'users:login' %}" class="btn btn-outline-secondary">Вход</a>
+          <a href="{% url 'users:register' %}" class="btn btn-outline-secondary">Регистрация</a>
+          </div>
+          <p> Вы здесь Гость, <br> войдите или зарегистрируйтесь. </p>
+          {% endif %}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+
