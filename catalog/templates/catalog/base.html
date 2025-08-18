@@ -162,7 +162,21 @@
 
 <div align="center">
   <div class="container py-2">
-      <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить продукт</a>
+    <a class="btn btn-primary" href="{% url 'catalog:product_create' %}" role="button">Добавить продукт</a>
+  </div>
+  <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenuButton1">
+        Выбрать категорию
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        {% for category in categories %}
+            <li>
+              <a class="dropdown-item" href="#">
+                {{category.category_name}}
+              </a>
+            </li>
+        {% endfor %}
+      </ul>
   </div>
 </div>
 

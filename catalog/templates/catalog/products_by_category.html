@@ -1,0 +1,44 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+
+
+{% block title %} Товары в категории: {{category.category_name}} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+  {% for product in products_by_category %}
+    <div class="col">
+      <div class="card shadow-sm">
+        <img src="{{product.image | media_filter}}" width="100%" height="100%" alt="{{product.product_name}}">
+        <div class="card-body">
+          <p class="card-text"> {{product.product_name}} </p>
+          <p class="card-text"> {{product.description|truncatechars:100}} </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              {% if perms.catalog.can_unpublish_product and product.is_published == True %}
+                <a class="btn btn-warning" href="{% url 'catalog:product_update' product.pk %}" role="button">Отменить публикацию</a>
+                <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+              {% elif perms.catalog.can_unpublish_product and product.is_published == False %}
+                <a class="btn btn-secondary" href="{% url 'catalog:product_update' product.pk %}" role="button">Не опубликовано</a>
+                <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+              {% elif perms.catalog.can_delete_product or user == product.owner %}
+                <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробнее</a>
+                <a class="btn btn-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Редактировать</a>
+                <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+              {% else %}
+                <a class="btn btn-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Подробнее</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+</div>
+
+{% endblock %}
