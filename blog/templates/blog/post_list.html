@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+
+
+{% block title %} Опубликованные посты {% endblock %}
+
+{% block content %}
+
+<div>
+<article class="blog-post">
+    {% for object in object_list %}
+
+        <h2>{{object.title}}</h2>
+        <p class="blog-post-meta"> {{object.created_at}} </p>
+        <p> {{object.content}} </p>
+        <img src="{{object.preview | media_filter}}" alt="{{object.post_title}}">
+        <p>Просмотров: {{object.views_count}}</p>
+            <a class="btn btn-primary" href="{% url 'blog:post_detail' object.pk %}" role="button">Подробнее</a>
+        <hr>
+
+    {% endfor %}
+</article>
+</div>
+
+{% endblock %}
